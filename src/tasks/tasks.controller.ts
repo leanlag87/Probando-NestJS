@@ -1,7 +1,8 @@
 //En este archivo definimos el controlador de tareas y la ruta para obtener todas las tareas
 
 //importamos el decorador Controller de NestJS para crear un controlador
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { TasksService } from './tasks.service';
 
 //Creamos el decorador Controller y la clase
@@ -25,8 +26,11 @@ export class TasksController {
   // ESTA ES UNA FORMA SIN USAR "SERVICE" RETORNAMOS DIRECTAMENTE DESDE EL CONTROLADOR
   //importamos el decorador Get de NestJS para definir una ruta de tipo GET
   @Get('/') //Ruta para el Home Page
-  index() {
-    return 'Pagina Inicial'; //Retornamos un string
+  index(@Req() request: Request, @Res() response: Response) {
+    console.log(request.url);
+    return response.status(200).json({
+      message: 'Bienvenido a el Home Page 🏠',
+    });
   }
 
   // LLAMAMOS AL SERVICIO DE TAREAS PARA OBTENER TODAS LAS TAREAS
