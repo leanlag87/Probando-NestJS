@@ -11,4 +11,20 @@ export class ProjectsService {
   getAllProjects() {
     return this.projects; //Retornamos un arreglo de proyectos como ejemplo
   }
+
+  createProject() {
+    return 'Crear un nuevo proyecto';
+  }
+
+  updateProject() {
+    return 'Actualizar un proyecto existente';
+  }
+
+  deleteProject() {
+    return 'Eliminar un proyecto existente';
+  }
+
+  partiallyUpdateProject() {
+    return 'Actualizar parcialmente un proyecto existente';
+  }
 }

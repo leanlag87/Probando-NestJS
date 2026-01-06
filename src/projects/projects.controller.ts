@@ -1,15 +1,48 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 
-@Controller({}) //Decorador que recibe un objeto de configuración
+@Controller('/projects') //Decorador que recibe un objeto de configuración
 // Por ejemplo si aqui @Controller('projects') la ruta seria localhost:3000/projects
 export class ProjectsController {
   //Creamos el constructor para inyectar el servicio "IMPORTAMOS"
   constructor(private projectsService: ProjectsService) {}
 
   //Ahora creamos el endpoint para obtener todos los proyectos "EJECUTAMOS"
-  @Get('/projects') //definimos la ruta para obtener todos los proyectos
+  @Get() //definimos la ruta para obtener todos los proyectos
   getAllProjects() {
     return this.projectsService.getAllProjects(); //Llamamos al metodo del servicio para obtener los proyectos
   }
+
+  //Probamos los demas metodos HTTP (POST, PUT, DELETE)
+  @Post()
+  createProject() {
+    return this.projectsService.createProject();
+  }
+
+  @Put('/:id')
+  updateProject() {
+    return this.projectsService.updateProject();
+  }
+
+  @Delete('/:id')
+  deleteProject() {
+    return this.projectsService.deleteProject();
+  }
+
+  //Este metodo es ideal para actualizar cosas específicas
+  @Patch('/:id')
+  partiallyUpdateProject() {
+    return this.projectsService.partiallyUpdateProject();
+  }
 }
+
+/**
+ * Quiero hacer la prueba si poniendo en el decorador @Controller '/projects' y luego en los que tienen
+ * '/projects/:id' funciona igual cuando hago el testeo en insomnia/postman
+ * Por ejemplo Post y Get quedaria vacio @Post() y Put quedaria @Put('/:id')
+ *
+ *{
+	"BASE_PATH": "http://localhost:3000/"
+}
+ *
+ */
