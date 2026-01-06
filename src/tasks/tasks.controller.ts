@@ -11,13 +11,16 @@ import { TasksService } from './tasks.service';
 //Definimos la clase del controlador
 export class TasksController {
   //Creo una variable y de digo de que tipo es
-  tasksService: TasksService; //sirve para definir el tipo de la variable
+  //tasksService: TasksService; //sirve para definir el tipo de la variable
 
   //Creamos el contructor de la clase y definimos el servicio de tareas con su tipo
   //Con esto podemos usar los metodos del servicio de tareas en el controlador
-  constructor(tasksService: TasksService) {
-    this.tasksService = tasksService; //Asignamos el servicio de tareas a la variable
-  }
+  // constructor(tasksService: TasksService) {
+  //   this.tasksService = tasksService; //Asignamos el servicio de tareas a la variable
+  // }
+
+  //Forma mas "resumida" de hacer lo mismo que arriba
+  constructor(private tasksService: TasksService) {}
 
   // ESTA ES UNA FORMA SIN USAR "SERVICE" RETORNAMOS DIRECTAMENTE DESDE EL CONTROLADOR
   //importamos el decorador Get de NestJS para definir una ruta de tipo GET
