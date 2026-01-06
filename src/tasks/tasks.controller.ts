@@ -5,6 +5,8 @@ import { Controller, Get } from '@nestjs/common';
 
 //Creamos el decorador Controller y la clase
 @Controller({}) //Decorador que recibe un objeto de configuración
+// Por ejemplo si aqui @Controller('tasks') la ruta seria localhost:3000/tasks
+
 //Definimos la clase del controlador
 export class TasksController {
   //importamos el decorador Get de NestJS para definir una ruta de tipo GET
