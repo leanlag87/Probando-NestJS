@@ -1,7 +1,7 @@
 //En este archivo definimos el controlador de tareas y la ruta para obtener todas las tareas
 
 //importamos el decorador Controller de NestJS para crear un controlador
-import { Controller, Get, Req, Res } from '@nestjs/common';
+import { Controller, Get, HttpCode, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { TasksService } from './tasks.service';
 
@@ -44,4 +44,13 @@ export class TasksController {
     //Ahora llamamos al servicio de tareas para obtener todas las tareas
     return this.tasksService.getAllTasks(); //Retornamos el resultado del método getAllTasks del servicio de tareas
   } //Clase que exporta el controlador
+
+  //Creamos de ejemplo un endpoint que retorne un codigo de estado 404
+  @Get('notfound')
+  @HttpCode(404) //Decorador para definir el codigo de estado de la respuesta
+  notFound() {
+    return {
+      message: 'Recurso no encontrado',
+    };
+  }
 }
