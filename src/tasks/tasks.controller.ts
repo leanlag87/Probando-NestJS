@@ -27,6 +27,7 @@ export class TasksController {
   //importamos el decorador Get de NestJS para definir una ruta de tipo GET
   @Get('/') //Ruta para el Home Page
   index(@Req() request: Request, @Res() response: Response) {
+    //esto seria usando la sintaxis de express, no es necesario en nestjs, pero se puede usar
     console.log(request.url);
     return response.status(200).json({
       message: 'Bienvenido a el Home Page 🏠',

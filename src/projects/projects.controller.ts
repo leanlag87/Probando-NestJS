@@ -1,4 +1,13 @@
-import { Controller, Delete, Get, Patch, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Patch,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 
 @Controller('/projects') //Decorador que recibe un objeto de configuración
@@ -9,14 +18,18 @@ export class ProjectsController {
 
   //Ahora creamos el endpoint para obtener todos los proyectos "EJECUTAMOS"
   @Get() //definimos la ruta para obtener todos los proyectos
-  getAllProjects() {
+  getAllProjects(@Query() query: any) {
+    //El decorador @Query nos sirve para especificar cuantos parametros queremos recibir por query
+    // Por ejemplo localhost:3000/projects?limit=10&offset=20 (le decimos que el limite es 10 y el offset 20)
+    console.log(query);
     return this.projectsService.getAllProjects(); //Llamamos al metodo del servicio para obtener los proyectos
   }
 
   //Probamos los demas metodos HTTP (POST, PUT, DELETE)
   @Post()
-  createProject() {
-    return this.projectsService.createProject();
+  createProject(@Body() project: any) {
+    //Se usa el decorador @Body para obtener los datos enviados en el cuerpo de la solicitud
+    return this.projectsService.createProject(project);
   }
 
   @Put('/:id')
