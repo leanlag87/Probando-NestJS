@@ -7,11 +7,13 @@ import {
   HttpCode,
   Param,
   ParseIntPipe,
+  Query,
   Req,
   Res,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { TasksService } from './tasks.service';
+import { ValidateUserPipe } from './pipe/validate-user/validate-user.pipe';
 
 //Creamos el decorador Controller y la clase
 @Controller({}) //Decorador que recibe un objeto de configuración
@@ -66,5 +68,11 @@ export class TasksController {
   @Get('ticket/:num')
   getNumbrer(@Param('num', ParseIntPipe) num: number) {
     return num + 8;
+  }
+
+  //Funcion de tipo GET con un Pipe personalizado para validar los query params
+  @Get('task-user/:userId')
+  getUserTask(@Query(ValidateUserPipe) query: { name: string; age: number }) {
+    return 'Hola ' + query.name + ', tienes ' + query.age + ' años.';
   }
 }
