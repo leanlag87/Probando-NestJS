@@ -10,6 +10,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
+import { CreateProjectDto } from './dto/create-project.dto';
 
 @Controller('/projects') //Decorador que recibe un objeto de configuración
 // Por ejemplo si aqui @Controller('projects') la ruta seria localhost:3000/projects
@@ -36,7 +37,8 @@ export class ProjectsController {
 
   //Probamos los demas metodos HTTP (POST, PUT, DELETE)
   @Post()
-  createProject(@Body() project: any) {
+  createProject(@Body() project: CreateProjectDto) {
+    //Al pasarle del "DTO" "CreateProjectDto" le decimos que el proyecto que vamos a recibir debe tener la misma estructura
     //Se usa el decorador @Body para obtener los datos enviados en el cuerpo de la solicitud
     return this.projectsService.createProject(project);
   }

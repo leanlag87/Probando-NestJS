@@ -1,4 +1,5 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
+import { CreateProjectDto } from './dto/create-project.dto';
 
 @Injectable()
 export class ProjectsService {
@@ -25,7 +26,8 @@ export class ProjectsService {
   }
 
   //Le pasamos el proyecto que queremos crear por parametro, se debe parar por parametro porque lo recibimos del controlador
-  createProject(project: any) {
+  //Al pasarle del "DTO" "CreateProjectDto" le decimos que el proyecto que vamos a recibir debe tener la misma estructura
+  createProject(project: CreateProjectDto) {
     console.log(project);
     this.projects.push(project); //Agregamos el nuevo proyecto al arreglo
     return project; //Retornamos el arreglo actualizado
