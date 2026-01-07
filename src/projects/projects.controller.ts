@@ -8,6 +8,8 @@ import {
   Post,
   Put,
   Query,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
@@ -38,6 +40,7 @@ export class ProjectsController {
 
   //Probamos los demas metodos HTTP (POST, PUT, DELETE)
   @Post()
+  @UsePipes(new ValidationPipe()) //usamos el pipe de validacion para validar los datos que vienen en el cuerpo de la solicitud
   createProject(@Body() project: CreateProjectDto) {
     //Al pasarle del "DTO" "CreateProjectDto" le decimos que el proyecto que vamos a recibir debe tener la misma estructura
     //Se usa el decorador @Body para obtener los datos enviados en el cuerpo de la solicitud
