@@ -10,10 +10,12 @@ import {
   Query,
   Req,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { TasksService } from './tasks.service';
 import { ValidateUserPipe } from './pipe/validate-user/validate-user.pipe';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 //Creamos el decorador Controller y la clase
 @Controller({}) //Decorador que recibe un objeto de configuración
@@ -72,6 +74,7 @@ export class TasksController {
 
   //Funcion de tipo GET con un Pipe personalizado para validar los query params
   @Get('task-user/:userId')
+  @UseGuards(AuthGuard) //Usamos el guardia de autenticacion en esta ruta
   getUserTask(@Query(ValidateUserPipe) query: { name: string; age: number }) {
     return 'Hola ' + query.name + ', tienes ' + query.age + ' años.';
   }
