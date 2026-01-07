@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   Patch,
   Post,
   Put,
@@ -23,6 +24,14 @@ export class ProjectsController {
     // Por ejemplo localhost:3000/projects?limit=10&offset=20 (le decimos que el limite es 10 y el offset 20)
     console.log(query);
     return this.projectsService.getAllProjects(); //Llamamos al metodo del servicio para obtener los proyectos
+  }
+
+  //Obetemos un solo proyecto por su id usando el decorador "@Param"
+  //"Param" nos permite obtener los parametros que vienen en la URL
+  @Get('/:id')
+  getProjectById(@Param('id') id: string) {
+    console.log(id);
+    return this.projectsService.getProjectById(parseInt(id));
   }
 
   //Probamos los demas metodos HTTP (POST, PUT, DELETE)

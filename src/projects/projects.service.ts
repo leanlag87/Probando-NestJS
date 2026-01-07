@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotAcceptableException } from '@nestjs/common';
 
 @Injectable()
 export class ProjectsService {
@@ -11,6 +11,17 @@ export class ProjectsService {
   ];
   getAllProjects() {
     return this.projects; //Retornamos un arreglo de proyectos como ejemplo
+  }
+
+  getProjectById(id: number) {
+    const projectFound = this.projects.find((project) => project.id === id);
+
+    if (!projectFound) {
+      //NotAcceptableException es una excepcion que nos da NestJS para manejar errores
+      return new NotAcceptableException(`Proyecto con id ${id} no encontrado`);
+    }
+
+    return projectFound;
   }
 
   //Le pasamos el proyecto que queremos crear por parametro, se debe parar por parametro porque lo recibimos del controlador
