@@ -1,7 +1,15 @@
 //En este archivo definimos el controlador de tareas y la ruta para obtener todas las tareas
 
 //importamos el decorador Controller de NestJS para crear un controlador
-import { Controller, Get, HttpCode, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  Param,
+  ParseIntPipe,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 import { TasksService } from './tasks.service';
 
@@ -52,5 +60,11 @@ export class TasksController {
     return {
       message: 'Recurso no encontrado',
     };
+  }
+
+  //Funfion de tipo GET que reciba un parametro por la URL y lo retorne sumandole 8
+  @Get('ticket/:num')
+  getNumbrer(@Param('num', ParseIntPipe) num: number) {
+    return num + 8;
   }
 }
