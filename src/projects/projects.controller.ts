@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
 
 @Controller('/projects') //Decorador que recibe un objeto de configuración
 // Por ejemplo si aqui @Controller('projects') la ruta seria localhost:3000/projects
@@ -44,8 +45,8 @@ export class ProjectsController {
   }
 
   @Put('/:id')
-  updateProject() {
-    return this.projectsService.updateProject();
+  updateProject(@Body() project: UpdateProjectDto) {
+    return this.projectsService.updateProject(project);
   }
 
   @Delete('/:id')

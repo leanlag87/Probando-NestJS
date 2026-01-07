@@ -1,5 +1,6 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
+import { UpdateProjectDto } from './dto/update-project.dto';
 
 @Injectable()
 export class ProjectsService {
@@ -33,7 +34,8 @@ export class ProjectsService {
     return project; //Retornamos el arreglo actualizado
   }
 
-  updateProject() {
+  updateProject(project: UpdateProjectDto) {
+    console.log(`Actualizar proyecto: ${JSON.stringify(project)}`);
     return 'Actualizar un proyecto existente';
   }
 
