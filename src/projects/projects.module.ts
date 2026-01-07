@@ -2,6 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ProjectsController } from './projects.controller';
 import { ProjectsService } from './projects.service';
 import { LoggerMiddleware } from './logger/logger.middleware';
+import { AuthMiddleware } from './auth/auth.middleware';
 
 @Module({
   controllers: [ProjectsController],
@@ -19,6 +20,11 @@ import { LoggerMiddleware } from './logger/logger.middleware';
  */
 export class ProjectsModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('projects'); //Aqui van los middlewares que queramos aplicar
+    //Aqui van los middlewares que queramos aplicar
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes('projects')
+      .apply(AuthMiddleware)
+      .forRoutes('projects'); //llamamos al segundo middleware para que tambien se aplique
   }
 }
