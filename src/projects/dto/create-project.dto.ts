@@ -52,4 +52,7 @@ export class CreateProjectDto {
  * @IsArray() - El campo debe ser un arreglo
  * @ArrayMinSize(n) - El arreglo debe tener al menos n elementos
  * @ArrayMaxSize(n) - El arreglo debe tener como maximo n elementos
+ *
+ * https://docs.nestjs.com/techniques/validation
+ *
  */
