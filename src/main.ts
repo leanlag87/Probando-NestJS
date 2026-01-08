@@ -27,7 +27,11 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, documentFactory);
 
   //Habilitamos CORS para que se puedan hacer peticiones desde otros dominios
-  app.enableCors();
+  app.enableCors({
+    //Podemos configurar que dominios pueden hacer peticiones
+    origin: '*', //Cualquier dominio puede hacer peticiones
+    // un dominio en especifico seria origin: 'http://midominio.com' o uno en desarrollo origin: 'http://localhost:3000'
+  });
 
   //Usamos el ValidationPipe que nos da NestJS para validar los datos que vienen en las solicitudes
   await app.listen(process.env.PORT ?? 3000);
