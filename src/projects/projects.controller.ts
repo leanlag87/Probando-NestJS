@@ -12,12 +12,17 @@ import {
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('/projects') //Decorador que recibe un objeto de configuración
 // Por ejemplo si aqui @Controller('projects') la ruta seria localhost:3000/projects
 export class ProjectsController {
   //Creamos el constructor para inyectar el servicio "IMPORTAMOS"
   constructor(private projectsService: ProjectsService) {}
+
+  //Documentamos con swagger con sus tags y decoradores
+  //Esto es una forma de poner una etiqueta especifica a este controlador
+  @ApiTags('projects')
 
   //Ahora creamos el endpoint para obtener todos los proyectos "EJECUTAMOS"
   @Get() //definimos la ruta para obtener todos los proyectos
@@ -28,6 +33,8 @@ export class ProjectsController {
     return this.projectsService.getAllProjects(); //Llamamos al metodo del servicio para obtener los proyectos
   }
 
+  //Documentamos con swagger con sus tags y decoradores
+  @ApiTags('projects')
   //Obetemos un solo proyecto por su id usando el decorador "@Param"
   //"Param" nos permite obtener los parametros que vienen en la URL
   @Get('/:id')

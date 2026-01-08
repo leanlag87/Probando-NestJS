@@ -16,10 +16,15 @@ import { Request, Response } from 'express';
 import { TasksService } from './tasks.service';
 import { ValidateUserPipe } from './pipe/validate-user/validate-user.pipe';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 //Creamos el decorador Controller y la clase
 @Controller({}) //Decorador que recibe un objeto de configuración
 // Por ejemplo si aqui @Controller('tasks') la ruta seria localhost:3000/tasks
+
+//Agregamos el tag "tasks" para documentar con swagger
+//De esta forma todas las rutas de este controlador tendran el tag "tasks"
+@ApiTags('tasks')
 
 //Definimos la clase del controlador
 export class TasksController {
@@ -38,6 +43,13 @@ export class TasksController {
   // ESTA ES UNA FORMA SIN USAR "SERVICE" RETORNAMOS DIRECTAMENTE DESDE EL CONTROLADOR
   //importamos el decorador Get de NestJS para definir una ruta de tipo GET
   @Get('/') //Ruta para el Home Page
+  //De esta forma le ponemos una descripcion a la ruta para documentacion en swagger
+  @ApiOperation({ summary: 'Página de inicio' })
+  //De esta forma definimos la respuesta esperada para documentacion en swagger
+  @ApiResponse({
+    status: 200,
+    description: 'Página de inicio obtenida correctamente.',
+  })
   index(@Req() request: Request, @Res() response: Response) {
     //esto seria usando la sintaxis de express, no es necesario en nestjs, pero se puede usar
     console.log(request.url);
@@ -48,6 +60,14 @@ export class TasksController {
 
   // LLAMAMOS AL SERVICIO DE TAREAS PARA OBTENER TODAS LAS TAREAS
   @Get('/tasks') //Decorador que recibe un string que define la ruta de la petición
+  //De esta forma le ponemos una descripcion a la ruta para documentacion en swagger
+  @ApiOperation({ summary: 'Obtener todas las tareas' })
+
+  //De esta forma definimos la respuesta esperada para documentacion en swagger
+  @ApiResponse({
+    status: 200,
+    description: 'Lista de tareas obtenida correctamente.',
+  })
   getAllTasks() {
     //Método que se ejecutará cuando se haga una petición GET a la ruta /tasks
     //   return 'Obteniendo todas las tareas 🤟'; //Retornamos un string
