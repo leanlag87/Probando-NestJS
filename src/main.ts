@@ -26,6 +26,9 @@ async function bootstrap() {
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
 
+  //Habilitamos CORS para que se puedan hacer peticiones desde otros dominios
+  app.enableCors();
+
   //Usamos el ValidationPipe que nos da NestJS para validar los datos que vienen en las solicitudes
   await app.listen(process.env.PORT ?? 3000);
 }
