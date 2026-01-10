@@ -1,3 +1,4 @@
+//Este test verifica que el servicio ProjectsService esté definido correctamente.
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProjectsService } from './projects.service';
 
