@@ -1,3 +1,4 @@
+//Este test verifica que el controlador ProjectsController esté definido correctamente.
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProjectsController } from './projects.controller';
 
